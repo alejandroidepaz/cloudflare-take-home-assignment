@@ -4,6 +4,6 @@ Cloudflare worker project developed for the 2020 new grad software engineering p
 
 #### Dev Links:
 
-[My Worker Project](https://my-worker.alejandrodepaz.workers.dev/)
-[JSON API Link](https://my-worker.alejandrodepaz.workers.dev/links)
+[My Worker Project](https://my-worker.alejandrodepaz.workers.dev/) 
+| [JSON API Link](https://my-worker.alejandrodepaz.workers.dev/links)
 
