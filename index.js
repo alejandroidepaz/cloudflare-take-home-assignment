@@ -1,3 +1,5 @@
+import {LinksTransformer, UpdateAttribute, UpdateContent, SocialLinksTransformer} from "./classes";
+
 addEventListener('fetch', event => {
 
   const links = [{"name":"My Portfolio", "link": "https://alejandrodepaz.com"}, {"name":"BitBucket", "link": "https://bitbucket.org/alejandrodepaz/software-projects"}, {"name":"LinkedIn", "link": "https://www.linkedin.com/in/alejandrodepaz/"}]
@@ -33,7 +35,7 @@ async function handleGenericRequest(request, links){ // Handler for all requests
   const rewriter = new HTMLRewriter()
   .on("div#links", new LinksTransformer(links))
   .on("div#profile", new UpdateAttribute("style", "display:flex"))
-  .on("img#avatar", new UpdateAttribute("src", "https://media-exp1.licdn.com/dms/image/C5635AQH3uelN1T6DBA/profile-framedphoto-shrink_200_200/0?e=1603152000&v=beta&t=zMvjtl426mPq1oxbfmeIzIz3V13W6YJog-e17pwsM8o"))
+  .on("img#avatar", new UpdateAttribute("src", "https://media-exp1.licdn.com/dms/image/C5635AQH3uelN1T6DBA/profile-framedphoto-shrink_400_400/0?e=1603404000&v=beta&t=v8jrd4YtG5KegadNpWtAD6qtmmOFwzBKXsvshzraaTE"))
   .on("h1#name", new UpdateContent("Alejandro De Paz"))
   .on("title", new UpdateContent("Alejandro De Paz"))
   .on("div#social", new UpdateAttribute("style", "display:flex"))
@@ -45,54 +47,4 @@ async function handleGenericRequest(request, links){ // Handler for all requests
       "content-type": "text/html;charset=UTF-8",
     },
   });
-}
-
-
-// HTMLRewriter element handlers
-class LinksTransformer {
-  constructor(links) {
-    this.links = links
-  }
-
-  async element(element) {
-    this.links.forEach(linkData =>{
-      element.append(`<a href='${linkData.link}' target='_blank'>${linkData.name}</a>`, {html:true})
-    })
-  }
-}
-
-class UpdateAttribute{
-  constructor(attributeName, newValue){
-    this.attributeName = attributeName;
-    this.newValue = newValue;
-  }
-
-  async element(element){
-    element.setAttribute(this.attributeName, this.newValue);
-  }
-
-}
-
-class UpdateContent{
-
-  constructor(newContent){
-    this.content = newContent
-  }
-
-  async element(element){
-    element.setInnerContent(this.content)
-  }
-}
-
-class SocialLinksTransformer{
-
-  constructor(images){
-    this.images = images
-  }
-
-  async element(element){
-    this.images.forEach(dataPair =>{
-      element.append(`<a href='${dataPair.link}' target='_blank'> <img src='${dataPair.imgPath}'></img></a>`, {html:true})
-    })
-  }
 }
